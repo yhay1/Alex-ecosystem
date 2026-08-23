@@ -2,14 +2,6 @@
   "name": "untitled",
   "main": "Alex/index.ts",
   "compatibility_date": "2026-08-23",
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "alex-ecosystem",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
-      "migrations_dir": "Alex/database/migrations"
-    }
-  ],
   "r2_buckets": [
     {
       "binding": "BUCKET",

@@ -84,11 +84,11 @@ The Worker entry point is `Alex/index.ts`. Product placeholders live under `prod
 
 ## D1 setup
 
-The shared database service supports Cloudflare D1 through the `DB` binding in
-`wrangler.jsonc`. To use it locally or deploy later:
+The shared database service supports Cloudflare D1 through an optional `DB`
+binding in `wrangler.jsonc`. To enable it locally or for deployment:
 
 1. Create a D1 database with Wrangler.
-2. Replace `REPLACE_WITH_D1_DATABASE_ID` with the database ID in `wrangler.jsonc`.
+2. Add the `DB` binding with the real database ID in `wrangler.jsonc`.
 3. Apply migrations with `npx wrangler d1 migrations apply alex-ecosystem`.
 
 No D1 database is provisioned by this repository yet. The in-memory database

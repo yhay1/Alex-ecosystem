@@ -17,7 +17,7 @@ in-memory or mocked services wherever a Cloudflare resource is not required.
 `wrangler.jsonc` currently describes these resources:
 
 - Worker: `alex-ecosystem`
-- D1 binding: `DB`, database name `alex-ecosystem`
+- D1 binding: optional; configure `DB` only after provisioning a real database
 - KV binding: optional; configure `KV` only after provisioning a real namespace
 - R2 binding: `BUCKET`
 - Queue producer binding: `JOBS`, queue `alex-ecosystem-jobs`
