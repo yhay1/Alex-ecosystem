@@ -64,6 +64,22 @@ It refuses to run when credentials, account configuration, or resource IDs are
 missing. This repository does not deploy automatically and never stores
 credentials or secrets.
 
+To provision the configured Cloudflare resources, update `wrangler.jsonc`, apply
+the D1 migration, and deploy in one guarded command:
+
+```sh
+npx wrangler login
+npm run setup:cloudflare
+```
+
+The setup command creates only the configured D1 database, KV namespace, R2
+bucket, and Queue when their values are still placeholders. It captures the
+real identifiers returned by Wrangler, updates `wrangler.jsonc`, applies the
+remote D1 migration, and deploys the Worker. It never creates duplicate
+resources when the configured identifiers are already real. Turnstile or other
+runtime secrets remain a separate manual Wrangler secret step because their
+values must never be stored in the repository.
+
 The Worker entry point is `Alex/index.ts`. Product placeholders live under `products/`.
 
 ## D1 setup

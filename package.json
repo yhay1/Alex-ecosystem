@@ -14,6 +14,7 @@
     "validate:build": "wrangler deploy --dry-run",
     "validate:wrangler": "wrangler deploy --dry-run --config wrangler.jsonc",
     "validate:all": "node scripts/validate-all.js",
+    "setup:cloudflare": "node scripts/setup-cloudflare.js",
     "deploy": "node scripts/deploy.js"
   },
   "devDependencies": {
