@@ -1,0 +1,23 @@
+{
+  "name": "alex-ecosystem",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "dev:local": "wrangler dev --local",
+    "db:migrate:local": "wrangler d1 migrations apply alex-ecosystem --local",
+    "check": "tsc --noEmit",
+    "test": "node --test tests/*.test.js",
+    "validate:dependencies": "node scripts/validate-dependencies.js",
+    "validate:manifests": "node scripts/validate-manifests.js",
+    "validate:deployment": "node scripts/validate-deployment-config.js",
+    "validate:build": "wrangler deploy --dry-run",
+    "validate:wrangler": "wrangler deploy --dry-run --config wrangler.jsonc",
+    "validate:all": "node scripts/validate-all.js",
+    "deploy": "node scripts/deploy.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "wrangler": "^4.0.0"
+  }
+}
