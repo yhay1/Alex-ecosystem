@@ -98,10 +98,11 @@ only the shared generic storage table.
 
 ## KV usage
 
-The shared KV service uses the `KV` binding in `wrangler.jsonc` for appropriate
-cache and configuration data. Replace `REPLACE_WITH_KV_NAMESPACE_ID` with a
-namespace ID when a namespace is provisioned. KV is not the source of truth for
-persistent relational data; D1 remains the shared relational database.
+The shared KV service is optional and is not currently bound in
+`wrangler.jsonc` because no production namespace ID has been provisioned. Add a
+real `KV` namespace binding before deploying features that require KV. KV is
+not the source of truth for persistent relational data; D1 remains the shared
+relational database.
 
 Wrangler uses a local KV namespace during `wrangler dev` by default. The
 `InMemoryKVService` is available for tests without any Cloudflare resources.

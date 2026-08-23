@@ -18,7 +18,7 @@ in-memory or mocked services wherever a Cloudflare resource is not required.
 
 - Worker: `alex-ecosystem`
 - D1 binding: `DB`, database name `alex-ecosystem`
-- KV binding: `KV`
+- KV binding: optional; configure `KV` only after provisioning a real namespace
 - R2 binding: `BUCKET`
 - Queue producer binding: `JOBS`, queue `alex-ecosystem-jobs`
 
