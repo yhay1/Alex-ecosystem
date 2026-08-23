@@ -8,7 +8,10 @@ export class ProductRouter {
 
   async fetch(request) {
     const pathname = new URL(request.url).pathname;
-    const product = this.registry.getByRoute(pathname);
+    const product = this.registry
+      .list()
+      .filter(({ route }) => pathname === route || pathname.startsWith(`${route}/`))
+      .sort((left, right) => right.route.length - left.route.length)[0];
 
     if (!product) {
       return notFound();
@@ -20,10 +23,17 @@ export class ProductRouter {
       return notFound();
     }
 
-    return handler(request, product, this.context);
+    const subPath = pathname.slice(product.route.length) || "/";
+    return handler(request, product, {
+      ...this.context,
+      productId: product.id,
+      productRoute: product.route,
+      subPath,
+      manifest: product,
+    });
   }
 }
 
-export function createRouter(registry) {
-  return new ProductRouter(registry);
+export function createRouter(registry, context = {}) {
+  return new ProductRouter(registry, context);
 }

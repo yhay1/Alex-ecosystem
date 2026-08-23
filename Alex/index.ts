@@ -17,6 +17,8 @@ import {
 import { withCors, withSecurityHeaders } from "./security/index.js";
 import exampleManifest from "../products/example-product/manifest.js";
 import exampleHandler from "../products/example-product/handler.js";
+import alexStudioManifest from "../products/alex-studio/manifest.js";
+import alexStudioHandler from "../products/alex-studio/handler.js";
 
 interface KVNamespace {
   get(key: string, type: "json"): Promise<unknown>;
@@ -36,6 +38,11 @@ interface WorkerEnv {
   DB?: D1Database;
   KV?: KVNamespace;
   BUCKET?: R2Bucket;
+  PROJECT_SECRETS_KEY?: string;
+  PROVIDER_CONNECTIONS_KEY?: string;
+  GITHUB_CLIENT_ID?: string;
+  GITHUB_CLIENT_SECRET?: string;
+  GITHUB_REDIRECT_URI?: string;
 }
 
 function createRuntime(env: WorkerEnv) {
@@ -57,6 +64,13 @@ function createRuntime(env: WorkerEnv) {
       ? new AuthenticationService(users, credentials, sessions)
       : undefined,
     authorization: new AuthorizationService(),
+    projectSecretsKey: env.PROJECT_SECRETS_KEY,
+    providerConnectionsKey: env.PROVIDER_CONNECTIONS_KEY,
+    github: {
+      clientId: env.GITHUB_CLIENT_ID,
+      clientSecret: env.GITHUB_CLIENT_SECRET,
+      redirectUri: env.GITHUB_REDIRECT_URI,
+    },
     security: { withCors, withSecurityHeaders },
     users,
   };
@@ -64,6 +78,7 @@ function createRuntime(env: WorkerEnv) {
 
 const registry = ProductRegistry.fromManifests([
   { manifest: exampleManifest, handler: exampleHandler },
+  { manifest: alexStudioManifest, handler: alexStudioHandler },
 ]);
 
 export default {
